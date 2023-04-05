@@ -12,6 +12,16 @@ Labyrinth-go 是 Labyrinth 基于 Go 的实现，旨在提高 Labyrinth 的转�
 
 `go get github.com/ERR0RPR0MPT/Labyrinth-go`
 
+程序需要调用 `ffmpeg` 来实现相关功能，因此你需要安装 FFmpeg 到你的机器中。
+
+Linux 下安装：
+
+`apt install ffmpeg -y`
+
+Windows 下安装：
+
+`在官网下载预发布的二进制文件：https://ffmpeg.org`
+
 下载源代码：
 
 `git clone https://github.com/ERR0RPR0MPT/Labyrinth-go.git`
@@ -29,6 +39,26 @@ Labyrinth-go 是 Labyrinth 基于 Go 的实现，旨在提高 Labyrinth 的转�
 注意：在进行加解密时，必须使用和图片宽高度匹配的 laby 文件
 
 只有使用匹配的 laby 文件进行解密才能得到近似于加密之前的图像/视频数据
+
+一些示例
+```shell
+# 生成一个迷宫图像
+./Labyrinth-go generate --width 100 --height 100 --mode hr --name maze.png
+
+# 使用一个迷宫文件加密一个源文件
+./Labyrinth-go encrypt --laby labyrinth.png --source source.png --output encrypted.png
+
+# 使用一个迷宫文件解密一个加密文件
+./Labyrinth-go decrypt --laby labyrinth.png --source encrypted.png --output decrypted.png
+
+# 加密一个视频文件
+./Labyrinth-go videoencrypt --laby labyrinth.png --source source.mp4 --framerate 30 --routines 4
+
+# 解密一个加密的视频文件
+./Labyrinth-go videodecrypt --laby labyrinth.png --source encrypted.mp4 --framerate 30 --routines 4
+```
+
+完整用法
 
 ```shell
 Usage: C:\Users\Weclont\AppData\Local\Temp\GoLand\___go_build_main_go.exe [command] [options]
