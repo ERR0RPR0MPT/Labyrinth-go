@@ -108,15 +108,31 @@ Commands:
 
 ## 效果
 
-原视频(1080P60fps)：https://www.bilibili.com/video/BV1x5411o7Kn
+以下的两个视频仅用于测试。
 
-加密后的视频(1080P60fps)：https://www.bilibili.com/video/BV1ks4y127nM
+### ONIMAI OP (1080P24fps)
 
-恢复后的视频(1080P60fps)：https://www.bilibili.com/video/BV17g4y1g798
+原视频(39MB)：https://www.bilibili.com/video/BV1x5411o7Kn
+
+加密后的视频(115MB)：https://www.bilibili.com/video/BV1ks4y127nM
+
+上传B站二压后下载的加密后的视频(59MB)
+
+使用本地加密源解密后的视频(83MB)：https://www.bilibili.com/video/BV1jk4y1q7iD
+
+使用B站二压源重新解密的视频(110MB)：https://www.bilibili.com/video/BV11j411w7Ku
+
+### Bad Apple!! (1080P60fps)
+
+原视频：https://www.bilibili.com/video/BV1x5411o7Kn
+
+加密后的视频：https://www.bilibili.com/video/BV1ks4y127nM
+
+本地解密后的视频：https://www.bilibili.com/video/BV17g4y1g798
 
 ## TODO
 
-- Bug: 加密后还原的视频会出现部分像素丢失/错误
+- Bug: 加密后还原的视频会出现像素丢失/错误以及色域不正确、颜色偏灰的问题，待解决
 - 图片颜色位移
 - 视频帧间重排
 - 音频分段重排
