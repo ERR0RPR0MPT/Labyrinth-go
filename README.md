@@ -42,20 +42,20 @@ Windows 下安装：
 
 一些示例
 ```shell
-# 生成一个迷宫图像
-./Labyrinth-go generate --width 100 --height 100 --mode hr --name maze.png
+# 生成一个随机的 laby 文件用于加解密
+./Labyrinth-go generate --width 1920 --height 1080 --mode hr --name index.laby
 
-# 使用一个迷宫文件加密一个源文件
-./Labyrinth-go encrypt --laby labyrinth.png --source source.png --output encrypted.png
+# 使用 laby 文件加密图片
+./Labyrinth-go encrypt --laby index.laby --source target.png --output encrypted.png
 
-# 使用一个迷宫文件解密一个加密文件
-./Labyrinth-go decrypt --laby labyrinth.png --source encrypted.png --output decrypted.png
+# 使用 laby 文件解密图片
+./Labyrinth-go decrypt --laby index.laby --source encrypted.png --output decrypted.png
 
 # 加密一个视频文件
-./Labyrinth-go videoencrypt --laby labyrinth.png --source source.mp4 --framerate 30 --routines 4
+./Labyrinth-go videoencrypt --laby index.laby --source target.mp4 --framerate 30 --routines 32
 
 # 解密一个加密的视频文件
-./Labyrinth-go videodecrypt --laby labyrinth.png --source encrypted.mp4 --framerate 30 --routines 4
+./Labyrinth-go videodecrypt --laby index.laby --source target_output.mp4 --framerate 30 --routines 32
 ```
 
 完整用法
