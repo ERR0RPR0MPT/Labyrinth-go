@@ -107,7 +107,7 @@ func VideoDecrypt(laby string, source string, framerate int, routines int) {
 	}
 
 	args := []string{
-		"-i", fmt.Sprintf("%s", sourceDir), "-vn", "-acodec", "libmp3lame", fmt.Sprintf("%s/%s_output.mp3", outputDir, sourceName),
+		"-i", fmt.Sprintf("%s", sourceDir), "-vn", "-acodec", "libmp3lame", "-b:a", "320k", "-ar", "44100", "-ac", "2", "-q:a", "0", fmt.Sprintf("%s/%s_output.mp3", outputDir, sourceName),
 	}
 	fmt.Println("开始提取音乐")
 
@@ -150,7 +150,7 @@ func VideoDecrypt(laby string, source string, framerate int, routines int) {
 	wg.Wait()
 
 	args = []string{
-		"-r", fmt.Sprintf("%d", framerate), "-i", fmt.Sprintf("%s/%%d.png", outputDirOutput), "-i", fmt.Sprintf("%s/%s_output.mp3", outputDir, sourceName), "-vcodec", "libx264", "-pix_fmt", "yuv420p", "-c:a", "copy", fmt.Sprintf("%s_output.mp4", sourceName),
+		"-r", fmt.Sprintf("%d", framerate), "-i", fmt.Sprintf("%s/%%d.png", outputDirOutput), "-i", fmt.Sprintf("%s/%s_output.mp3", outputDir, sourceName), "-vcodec", "libx264", "-pix_fmt", "yuv420p", "-c:a", "copy", fmt.Sprintf("%s_output.mp4", sourceName), "-crf", "15", "-preset", "slow", "-movflags", "+faststart", "-ac", "2", "-ar", "44100", "-b:a", "320k",
 	}
 	fmt.Println("开始合成视频")
 
