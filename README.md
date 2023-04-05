@@ -112,7 +112,7 @@ Commands:
 
 ### ONIMAI OP (1080P24fps)
 
-原视频(39MB)：https://www.bilibili.com/video/BV1x5411o7Kn
+原视频(39MB)：https://www.bilibili.com/video/BV1i44y1o7yp
 
 加密后的视频(115MB)：https://www.bilibili.com/video/BV1ks4y127nM
 
