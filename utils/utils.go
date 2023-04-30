@@ -2,9 +2,34 @@ package utils
 
 import (
 	"fmt"
+	"math/rand"
 	"os"
 	"os/exec"
 )
+
+// 随机字符集
+const letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+// GenerateRandomName 生成随机名称函数
+func GenerateRandomName(length int) string {
+	b := make([]byte, length)
+	for i := range b {
+		b[i] = letters[rand.Intn(len(letters))]
+	}
+	return string(b)
+}
+
+func ConvertTo2DArray(arr []byte, rows int) [][]byte {
+	cols := len(arr) / rows
+	result := make([][]byte, rows)
+	for i := 0; i < rows; i++ {
+		result[i] = make([]byte, cols)
+		for j := 0; j < cols; j++ {
+			result[i][j] = arr[i*cols+j]
+		}
+	}
+	return result
+}
 
 func RunCommand(command string, args []string) error {
 	cmd := exec.Command(command, args...)
