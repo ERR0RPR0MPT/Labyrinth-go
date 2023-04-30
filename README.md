@@ -34,7 +34,7 @@ Labyrinth 使用简单的混淆算法专门对视频及图像进行混淆处理�
 
 下载源码：
 
-`git clone https://github.com/ERR0RPR0MPT/Labyrinth-go`
+`git clone https://github.com/ERR0RPR0MPT/Labyrinth-go.git`
 
 程序需要调用 `ffmpeg` 来实现相关功能，因此你需要安装 `ffmpeg` 到你的机器中。
 
