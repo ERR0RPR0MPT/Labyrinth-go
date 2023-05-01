@@ -129,7 +129,7 @@ func main() {
 	switch os.Args[1] {
 	case "encode":
 		encodeFlag.Parse(os.Args[2:])
-		if *encodeInput == "" || *encodeOutput == "" || *encodeWidth == 0 || *encodeHeight == 0 || *encodeA == 0 || *encodeB == 0 {
+		if *encodeInput == "" || *encodeOutput == "" || *encodeWidth == 0 || *encodeHeight == 0 {
 			fmt.Println("Please specify all the required parameters for encode")
 			flag.Usage()
 			return

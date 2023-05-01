@@ -37,9 +37,25 @@ func EncodeVideo(inputFile string, outputFile string, width int, height int, a i
 	fmt.Println("Encode: 计算哈希值")
 	encodeFileHash := sha256.Sum256(data)
 	hashStr := fmt.Sprintf("%x", encodeFileHash)
-	fmt.Println("Encode: 源文件 Hash: " + hashStr)
+	fmt.Println("Encode: Hash: " + hashStr)
+	fmt.Printf("Encode: 文件长度: %d\n", len(data))
 
 	fmt.Println("Encode: 生成纠错码")
+	// 自动设置a, b
+	if a == 0 {
+		a = GetNextMultiple(len(data))
+		if a > 255 {
+			a = 255
+			fmt.Println("Encode: 没有找到文件长度的0-255的最小倍数，自动设置 a = 255")
+		}
+		if b == 0 {
+			b = a / 2
+		}
+		if b == -1 {
+			b = 0
+		}
+		fmt.Printf("Encode: 自动设置 a = %d, b = %d\n", a, b)
+	}
 	rs, err := reedsolomon.New(a, b, reedsolomon.WithMaxGoroutines(runtime.NumCPU()))
 	if err != nil {
 		return fmt.Errorf("create Reed-Solomon encoder failed: %w\n", err), ""
@@ -51,6 +67,8 @@ func EncodeVideo(inputFile string, outputFile string, width int, height int, a i
 	fmt.Println("Encode: 开始编码")
 	err = rs.Encode(shards)
 	if err != nil {
+		a = 20
+		b = 10
 		fmt.Println("Encode: 编码出现错误，看起来a和b值不能符合编码要求，尝试使用默认的a和b值进行编码:  a = 20, b = 10")
 		err := rs.Encode(shards)
 		if err != nil {
@@ -183,7 +201,7 @@ func EncodeVideo(inputFile string, outputFile string, width int, height int, a i
 	}
 	b64Info := base64.StdEncoding.EncodeToString(jsonInfo)
 	fmt.Println("Encode: 保存Base64配置到config.txt")
-	err = os.WriteFile("config_"+strings.Replace(inputFile, "/", "-", -1)+".txt", []byte(b64Info), 0644)
+	err = os.WriteFile("config_"+strings.Replace(inputFile, "/", "-", -1)+"_"+GenerateRandomName(8)+".txt", []byte(b64Info), 0644)
 	if err != nil {
 		fmt.Printf("write config file failed: %w\n", err)
 	}
@@ -346,7 +364,7 @@ func DecodeVideo(inputFile string, outputFile string, a int, b int, width int, h
 			fmt.Println("Decode: 哈希比对错误，生成的文件可能损坏")
 		}
 		fmt.Println("Decode: 保存哈希")
-		err = os.WriteFile("hash_SHA256_"+strings.Replace(outputFile, "/", "-", -1)+".txt", []byte(actualHash), 0644)
+		err = os.WriteFile("hash_SHA256_"+strings.Replace(outputFile, "/", "-", -1)+"_"+GenerateRandomName(8)+".txt", []byte(actualHash), 0644)
 		if err != nil {
 			fmt.Printf("writefile failed: %w\n", err)
 		}

@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"os"
 	"os/exec"
+	"time"
 )
 
 // 随机字符集
@@ -12,11 +13,23 @@ const letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 // GenerateRandomName 生成随机名称函数
 func GenerateRandomName(length int) string {
+	rand.Seed(time.Now().UnixNano())
 	b := make([]byte, length)
 	for i := range b {
 		b[i] = letters[rand.Intn(len(letters))]
 	}
 	return string(b)
+}
+
+func GetNextMultiple(length int) int {
+	a := 1
+	for i := 2; i <= length; i++ {
+		if length%i == 0 {
+			a = i
+			break
+		}
+	}
+	return a
 }
 
 func ConvertTo2DArray(arr []byte, rows int) [][]byte {
